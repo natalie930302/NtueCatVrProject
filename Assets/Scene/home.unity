@@ -13731,16 +13731,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 80ef1ea36b4e3cd4dbf00139a5475c32, type: 2}
     - target: {fileID: 1323203566713995293, guid: b5a1ae895684e4745984c4f9fe85fa6c, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'spine_02'\n\tTransform 'pelvis'\n\tTransform
-        'spine_03'\n\tTransform 'JawJoint_M'\n\tTransform 'spine_01'\n\tTransform
-        'index_03_l'\n\tTransform 'lowerarm_l'\n\tTransform 'pinky_03_l'\n\tTransform
-        'neck_01'\n\tTransform 'pinky_03_r'\n\tand more ...\n\tFrom animation clip
-        'Idle'\n\tFrom animation clip 'Walk'\n\tFrom animation clip 'Walk'\n\tFrom
-        animation clip 'Run'\n\tFrom animation clip 'Run'\n\tFrom animation clip
-        'Attack2'\n\tFrom animation clip 'Jump_In'\n\tFrom animation clip 'Fall'\n\tFrom
-        animation clip 'Jump_Out'\n\tFrom animation clip 'Win'\n\tand more ..."
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4953073893141731943, guid: b5a1ae895684e4745984c4f9fe85fa6c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13793,6 +13784,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5762086179667771613, guid: b5a1ae895684e4745984c4f9fe85fa6c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1147832022}
+    - targetCorrespondingSourceObject: {fileID: 5762086179667771613, guid: b5a1ae895684e4745984c4f9fe85fa6c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1147832025}
   m_SourcePrefab: {fileID: 100100000, guid: b5a1ae895684e4745984c4f9fe85fa6c, type: 3}
 --- !u!4 &934798420 stripped
 Transform:
@@ -17208,6 +17202,18 @@ MonoBehaviour:
   - {fileID: 663747625}
   - {fileID: 1414882969}
   - {fileID: 1868024019}
+--- !u!114 &1147832025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147832019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5e1df5130924e0fbd272e697d4e390, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1151530517
 PrefabInstance:
   m_ObjectHideFlags: 0

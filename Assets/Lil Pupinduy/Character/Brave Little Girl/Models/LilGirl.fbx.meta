@@ -736,7 +736,7 @@ ModelImporter:
     - name: ik_hand_l
       parentName: ik_hand_gun
       position: {x: -0.77885425, y: -0.6960191, z: 0.438695}
-      rotation: {x: 0.68747425, y: 0.614358, z: -0.38722542, w: -0.00000030318787}
+      rotation: {x: 0.6874742, y: 0.61435795, z: -0.38722536, w: -0.00000030318785}
       scale: {x: 1, y: 1, z: 1}
     - name: ik_hand_r
       parentName: ik_hand_gun
@@ -880,7 +880,7 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: lowerarm_r
       parentName: upperarm_r
-      position: {x: 0.136, y: -0, z: -0.008}
+      position: {x: 0.136, y: 0, z: 0.001}
       rotation: {x: -0.0008094998, y: 0.0063778074, z: 0.07374392, w: 0.9972565}
       scale: {x: 1, y: 1, z: 1}
     - name: hand_r
