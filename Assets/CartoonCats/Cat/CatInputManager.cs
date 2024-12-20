@@ -46,6 +46,13 @@ public class CatInputManager : MonoBehaviour
         // 移動方向
         Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y).normalized;
 
+        // 旋轉貓物件朝向移動方向
+        if (moveDirection != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+            catRoot.rotation = Quaternion.RotateTowards(catRoot.rotation, toRotation, moveSpeed * 100 * Time.deltaTime);
+        }
+
         // 移動貓物件
         catRoot.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
     }
