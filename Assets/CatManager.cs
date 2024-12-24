@@ -1,63 +1,79 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CatInputManager : MonoBehaviour
+public class CatManager : MonoBehaviour
 {
-    private Animator catAnimator;  // 貓的 Animator 組件
-    private Transform catRoot;     // 貓的 Transform（移動的根物件）
-    private InputManager input;   // 輸入系統
-    private Vector2 moveInput;     // 儲存輸入值
+    private Animator animator; // 動畫控制器
+    private Transform root; // 物件的根節點，用於移動和旋轉
+    private InputManager input; // 輸入管理器，用於接收玩家輸入
 
     [Header("移動參數")]
     [SerializeField] private float moveSpeed = 3f; // 移動速度
+    [SerializeField] private float rotationSpeed = 500f; // 旋轉速度
+
+    private Vector3 currentMoveDirection = Vector3.zero; // 當前移動方向
 
     private void Awake()
     {
-        // 自動抓取組件
-        catAnimator = GetComponent<Animator>();
-        catRoot = transform;
+        // 初始化動畫控制器
+        animator = GetComponent<Animator>();
 
-        // 初始化輸入系統
+        // 設置根節點
+        root = transform;
+
+        // 初始化輸入管理器並綁定事件
         input = new InputManager();
-
-        input.cat.move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
-        input.cat.move.canceled += ctx => moveInput = Vector2.zero;
+        input.cat.move.performed += ctx => UpdateMoveDirection(ctx.ReadValue<Vector2>());
+        input.cat.move.canceled += ctx => currentMoveDirection = Vector3.zero;
+        input.cat.jump.performed += ctx => Jump();
+        input.cat.attack.performed += ctx => Attack();
     }
 
     private void OnEnable() => input.Enable();
+
     private void OnDisable() => input.Disable();
 
     private void Update()
     {
-        bool isRunning = moveInput != Vector2.zero;
-
-        // 移動物件
-        if (isRunning)
-        {
-            MoveCat();
-        }
-
-        // 同步播放跑步動畫
-        catAnimator.SetBool("IsRun", isRunning);
+        Move();
     }
 
-    private void MoveCat()
+    private void UpdateMoveDirection(Vector2 inputDirection)
     {
-        // 移動方向
-        Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y).normalized;
-
-        // 旋轉貓物件朝向移動方向
-        if (moveDirection != Vector3.zero)
-        {
-            Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-
-            // 增加一個新的旋轉速度參數
-            float rotationSpeed = 500f; // 調整這個值來控制旋轉速度
-            catRoot.rotation = Quaternion.RotateTowards(catRoot.rotation, toRotation, rotationSpeed * Time.deltaTime);
-        }
-
-        // 移動貓物件
-        catRoot.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
+        // 將輸入方向轉換為本地座標系中的三維向量
+        currentMoveDirection = root.forward * inputDirection.y + root.right * inputDirection.x;
+        currentMoveDirection = currentMoveDirection.normalized; // 正規化方向向量
     }
 
+    private void Move()
+    {
+        // 判斷是否有移動輸入
+        bool isRunning = currentMoveDirection != Vector3.zero;
+
+        // 更新動畫參數
+        animator.SetBool("IsRun", isRunning);
+
+        if (!isRunning)
+        {
+            // 無移動輸入時退出
+            return;
+        }
+
+        // 計算旋轉方向並平滑旋轉
+        Quaternion targetRotation = Quaternion.LookRotation(currentMoveDirection, Vector3.up);
+        root.rotation = Quaternion.RotateTowards(root.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        // 執行移動（使用物件自身的方向）
+        root.position += currentMoveDirection * moveSpeed * Time.deltaTime;
+    }
+
+    private void Jump()
+    {
+        animator.SetTrigger("jump");
+    }
+
+    private void Attack()
+    {
+        animator.SetTrigger("attack");
+    }
 }

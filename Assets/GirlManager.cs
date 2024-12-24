@@ -1,60 +1,79 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class girlManager : MonoBehaviour
+public class GirlManager : MonoBehaviour
 {
-    private Animator girlAnimator;  // 貓的 Animator 組件
-    private Transform girlRoot;     // 貓的 Transform（移動的根物件）
-    private InputManager input;   // 輸入系統
-    private Vector2 moveInput;     // 儲存輸入值
+    private Animator animator; // 動畫控制器
+    private Transform root; // 物件的根節點，用於移動和旋轉
+    private InputManager input; // 輸入管理器，用於接收玩家輸入
 
     [Header("移動參數")]
     [SerializeField] private float moveSpeed = 3f; // 移動速度
+    [SerializeField] private float rotationSpeed = 500f; // 旋轉速度
+
+    private Vector3 currentMoveDirection = Vector3.zero; // 當前移動方向
 
     private void Awake()
     {
-        // 自動抓取組件
-        girlAnimator = GetComponent<Animator>();
-        girlRoot = transform;
+        // 初始化動畫控制器
+        animator = GetComponent<Animator>();
 
-        // 初始化輸入系統
+        // 設置根節點
+        root = transform;
+
+        // 初始化輸入管理器並綁定事件
         input = new InputManager();
-
-        input.girl.move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
-        input.girl.move.canceled += ctx => moveInput = Vector2.zero;
+        input.girl.move.performed += ctx => UpdateMoveDirection(ctx.ReadValue<Vector2>());
+        input.girl.move.canceled += ctx => currentMoveDirection = Vector3.zero;
+        // input.girl.jump.performed += ctx => Jump();
+        // input.girl.attack.performed += ctx => Attack();
     }
 
     private void OnEnable() => input.Enable();
+
     private void OnDisable() => input.Disable();
 
     private void Update()
     {
-        bool isWalking = moveInput != Vector2.zero;
-
-        // 移動物件
-        if (isWalking)
-        {
-            Movegirl();
-        }
-
-        // 同步播放跑步動畫
-        girlAnimator.SetBool("IsWalk", isWalking);
+        Move();
     }
 
-    private void Movegirl()
+    private void UpdateMoveDirection(Vector2 inputDirection)
     {
-        // 移動方向
-        Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y).normalized;
+        // 將輸入方向轉換為本地座標系中的三維向量
+        currentMoveDirection = root.forward * inputDirection.y + root.right * inputDirection.x;
+        currentMoveDirection = currentMoveDirection.normalized; // 正規化方向向量
+    }
 
-        // 旋轉貓物件朝向移動方向
-        if (moveDirection != Vector3.zero)
+    private void Move()
+    {
+        // 判斷是否有移動輸入
+        bool isRunning = currentMoveDirection != Vector3.zero;
+
+        // 更新動畫參數
+        animator.SetBool("IsRun", isRunning);
+
+        if (!isRunning)
         {
-            Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-            girlRoot.rotation = Quaternion.RotateTowards(girlRoot.rotation, toRotation, moveSpeed * 100 * Time.deltaTime);
+            // 無移動輸入時退出
+            return;
         }
 
-        // 移動貓物件
-        girlRoot.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
+        // 計算旋轉方向並平滑旋轉
+        Quaternion targetRotation = Quaternion.LookRotation(currentMoveDirection, Vector3.up);
+        root.rotation = Quaternion.RotateTowards(root.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        // 執行移動（使用物件自身的方向）
+        root.position += currentMoveDirection * moveSpeed * Time.deltaTime;
     }
+
+    // private void Jump()
+    // {
+    //     animator.SetTrigger("jump");
+    // }
+
+    // private void Attack()
+    // {
+    //     animator.SetTrigger("attack");
+    // }
 }
