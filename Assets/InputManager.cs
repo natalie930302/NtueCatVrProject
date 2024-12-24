@@ -29,12 +29,30 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""move"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""71ff49db-fa4f-45b0-8456-f4a12bf06ca6"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""22c9f93f-19d5-4d6d-859f-9b8d4f2991c2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""09b6d2e5-4607-4f32-a45e-016a100f252c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -92,6 +110,28 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""action"": ""move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cbded7ec-4397-4c50-8572-39d9a40e9594"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8ee7514-e9ee-430a-9391-6ce658413415"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -173,6 +213,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         // cat
         m_cat = asset.FindActionMap("cat", throwIfNotFound: true);
         m_cat_move = m_cat.FindAction("move", throwIfNotFound: true);
+        m_cat_attack = m_cat.FindAction("attack", throwIfNotFound: true);
+        m_cat_jump = m_cat.FindAction("jump", throwIfNotFound: true);
         // girl
         m_girl = asset.FindActionMap("girl", throwIfNotFound: true);
         m_girl_move = m_girl.FindAction("move", throwIfNotFound: true);
@@ -244,11 +286,15 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_cat;
     private List<ICatActions> m_CatActionsCallbackInterfaces = new List<ICatActions>();
     private readonly InputAction m_cat_move;
+    private readonly InputAction m_cat_attack;
+    private readonly InputAction m_cat_jump;
     public struct CatActions
     {
         private @InputManager m_Wrapper;
         public CatActions(@InputManager wrapper) { m_Wrapper = wrapper; }
         public InputAction @move => m_Wrapper.m_cat_move;
+        public InputAction @attack => m_Wrapper.m_cat_attack;
+        public InputAction @jump => m_Wrapper.m_cat_jump;
         public InputActionMap Get() { return m_Wrapper.m_cat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -261,6 +307,12 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @move.started += instance.OnMove;
             @move.performed += instance.OnMove;
             @move.canceled += instance.OnMove;
+            @attack.started += instance.OnAttack;
+            @attack.performed += instance.OnAttack;
+            @attack.canceled += instance.OnAttack;
+            @jump.started += instance.OnJump;
+            @jump.performed += instance.OnJump;
+            @jump.canceled += instance.OnJump;
         }
 
         private void UnregisterCallbacks(ICatActions instance)
@@ -268,6 +320,12 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @move.started -= instance.OnMove;
             @move.performed -= instance.OnMove;
             @move.canceled -= instance.OnMove;
+            @attack.started -= instance.OnAttack;
+            @attack.performed -= instance.OnAttack;
+            @attack.canceled -= instance.OnAttack;
+            @jump.started -= instance.OnJump;
+            @jump.performed -= instance.OnJump;
+            @jump.canceled -= instance.OnJump;
         }
 
         public void RemoveCallbacks(ICatActions instance)
@@ -334,6 +392,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     public interface ICatActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
     public interface IGirlActions
     {
