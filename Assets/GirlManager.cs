@@ -12,6 +12,7 @@ public class GirlManager : MonoBehaviour
     [SerializeField] private float rotationSpeed = 500f; // 旋轉速度
 
     private Vector3 currentMoveDirection = Vector3.zero; // 當前移動方向
+    private bool isGathering = false; // 狀態追蹤
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class GirlManager : MonoBehaviour
         input = new InputManager();
         input.girl.move.performed += ctx => UpdateMoveDirection(ctx.ReadValue<Vector2>());
         input.girl.move.canceled += ctx => currentMoveDirection = Vector3.zero;
+        input.girl.gather.performed += ctx => Gather(); // 切換 gather 狀態
         // input.girl.jump.performed += ctx => Jump();
         // input.girl.attack.performed += ctx => Attack();
     }
@@ -66,6 +68,22 @@ public class GirlManager : MonoBehaviour
         // 執行移動（使用物件自身的方向）
         root.position += currentMoveDirection * moveSpeed * Time.deltaTime;
     }
+    private void Gather()
+{
+    if (isGathering)
+    {
+        // 返回 Idle 狀態
+        isGathering = false;
+        animator.SetBool("IsGathering", false);
+    }
+    else
+    {
+        // 進入 Gather 狀態
+        isGathering = true;
+        animator.SetBool("IsGathering", true);
+        animator.SetTrigger("GatherTrigger");
+    }
+}
 
     // private void Jump()
     // {

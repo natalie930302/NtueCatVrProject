@@ -119,12 +119,21 @@
             "actions": [
                 {
                     "name": "move",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "4f1ef415-77e7-4dd5-9bad-d433e0f169b1",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "gather",
+                    "type": "Button",
+                    "id": "d96b935e-4eaf-4989-8cc4-8f7ab57cc18f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -182,6 +191,17 @@
                     "action": "move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "841f1a1d-27ef-40e9-99f3-09b7291e326d",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "gather",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

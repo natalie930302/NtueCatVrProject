@@ -141,12 +141,21 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""move"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""4f1ef415-77e7-4dd5-9bad-d433e0f169b1"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""gather"",
+                    ""type"": ""Button"",
+                    ""id"": ""d96b935e-4eaf-4989-8cc4-8f7ab57cc18f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -204,6 +213,17 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""action"": ""move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""841f1a1d-27ef-40e9-99f3-09b7291e326d"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""gather"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -218,6 +238,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         // girl
         m_girl = asset.FindActionMap("girl", throwIfNotFound: true);
         m_girl_move = m_girl.FindAction("move", throwIfNotFound: true);
+        m_girl_gather = m_girl.FindAction("gather", throwIfNotFound: true);
     }
 
     ~@InputManager()
@@ -348,11 +369,13 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_girl;
     private List<IGirlActions> m_GirlActionsCallbackInterfaces = new List<IGirlActions>();
     private readonly InputAction m_girl_move;
+    private readonly InputAction m_girl_gather;
     public struct GirlActions
     {
         private @InputManager m_Wrapper;
         public GirlActions(@InputManager wrapper) { m_Wrapper = wrapper; }
         public InputAction @move => m_Wrapper.m_girl_move;
+        public InputAction @gather => m_Wrapper.m_girl_gather;
         public InputActionMap Get() { return m_Wrapper.m_girl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -365,6 +388,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @move.started += instance.OnMove;
             @move.performed += instance.OnMove;
             @move.canceled += instance.OnMove;
+            @gather.started += instance.OnGather;
+            @gather.performed += instance.OnGather;
+            @gather.canceled += instance.OnGather;
         }
 
         private void UnregisterCallbacks(IGirlActions instance)
@@ -372,6 +398,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @move.started -= instance.OnMove;
             @move.performed -= instance.OnMove;
             @move.canceled -= instance.OnMove;
+            @gather.started -= instance.OnGather;
+            @gather.performed -= instance.OnGather;
+            @gather.canceled -= instance.OnGather;
         }
 
         public void RemoveCallbacks(IGirlActions instance)
@@ -398,5 +427,6 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     public interface IGirlActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnGather(InputAction.CallbackContext context);
     }
 }
