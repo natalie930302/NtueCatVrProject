@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5b5af5107e35a43818d5411328bfc3, type: 3}
   m_Name: DPadInteraction Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: D-Pad Binding
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.dpadinteraction
@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a24be4b5ebfe5f4d8ed1de9b25cb7aa, type: 3}
   m_Name: HandCommonPosesInteraction Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Hand Interaction Poses
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.handinteractionposes
@@ -621,7 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 056125dd64c0ed540b40a4af74f7b495, type: 3}
   m_Name: RuntimeDebuggerOpenXRFeature Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Runtime Debugger
   version: 1
   featureIdInternal: com.unity.openxr.features.runtimedebugger
@@ -864,7 +864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de993716e042c6499d0c18eed3a773c, type: 3}
   m_Name: MockRuntime Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Mock Runtime
   version: 0.0.2
   featureIdInternal: com.unity.openxr.feature.mockruntime
@@ -929,7 +929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b213d3e3c7f3109449eb46a4c8ee42f0, type: 3}
   m_Name: XrPerformanceSettingsFeature Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: XR Performance Settings
   version: 1.0.0
   featureIdInternal: com.unity.openxr.feature.extension.performance_settings
@@ -986,7 +986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f028123e2efe1d443875bc7609b4a98b, type: 3}
   m_Name: PalmPoseInteraction Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Palm Pose
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.palmpose
@@ -1258,7 +1258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a75d1f5ff90154ea2a8e58222a1f59, type: 3}
   m_Name: FoveatedRenderingFeature Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Foveated Rendering
   version: 1
   featureIdInternal: com.unity.openxr.feature.foveatedrendering
@@ -1329,7 +1329,6 @@ MonoBehaviour:
   - {fileID: -2909385541639872670}
   - {fileID: -8310459790789107106}
   - {fileID: 6708456584069231756}
-  - {fileID: 5905876250223963197}
   - {fileID: 3232346967964593076}
   - {fileID: -1805335324638774401}
   - {fileID: 9020285604387721392}
@@ -1340,21 +1339,6 @@ MonoBehaviour:
   - {fileID: -5297369902116556257}
   - {fileID: 2489723708372316978}
   - {fileID: -7813764543273530413}
-  - {fileID: -9223040216053874814}
-  - {fileID: 2890725635743277733}
-  - {fileID: -5692066544263062618}
-  - {fileID: -8861173715984433584}
-  - {fileID: -1152518857448247000}
-  - {fileID: 4766180531436644367}
-  - {fileID: -3693504785527835892}
-  - {fileID: -6820035302857937876}
-  - {fileID: -2145889516635737844}
-  - {fileID: -8156019067913862282}
-  - {fileID: 5384056137562174063}
-  - {fileID: -8131038666522350300}
-  - {fileID: 1221473070792223593}
-  - {fileID: -4078080584092041466}
-  - {fileID: -5243937014931881994}
   - {fileID: 5319877470810589186}
   m_renderMode: 1
   m_autoColorSubmissionMode: 1
@@ -1675,33 +1659,8 @@ MonoBehaviour:
   - {fileID: 7552075446714852304}
   - {fileID: 500642518884964361}
   - {fileID: -3267881542013228340}
-  - {fileID: 521229098456918633}
-  - {fileID: 3786090536363428523}
-  - {fileID: 5800625758890489876}
-  - {fileID: -918298195354112476}
-  - {fileID: 8673502381975613391}
-  - {fileID: -6943790082874503385}
-  - {fileID: -406292807151620945}
-  - {fileID: 7045239050881994776}
-  - {fileID: 5842287616026584399}
-  - {fileID: -874309701466718325}
-  - {fileID: -6997739235376448395}
-  - {fileID: 3042534782970146762}
-  - {fileID: 5921304147689705175}
-  - {fileID: -2252270769544045386}
-  - {fileID: 467440461115147860}
-  - {fileID: -6275824889523290513}
-  - {fileID: 2750299099543308231}
-  - {fileID: -735417460820116516}
-  - {fileID: 6676406569580500991}
-  - {fileID: -9108061103931370706}
-  - {fileID: 6120574917100951555}
-  - {fileID: -6670684710068427277}
-  - {fileID: -4490814989310928421}
-  - {fileID: -4144852592241143150}
-  - {fileID: 7673794584185370713}
   - {fileID: -173830342808068}
-  m_renderMode: 1
+  m_renderMode: 0
   m_autoColorSubmissionMode: 1
   m_colorSubmissionModes:
     m_List: 00000000
