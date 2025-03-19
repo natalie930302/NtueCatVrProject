@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Cockpit/CockpitScene.unity
     guid: b78a0ca5d851e4ddf993dcc6feab56d0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scene/Controller_Test.unity
     guid: 3c12dcdc7cde0604ebce463fb73c8581
   m_configObjects:
