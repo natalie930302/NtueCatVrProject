@@ -1,0 +1,34 @@
+{
+    "name": "XRInputActions",
+    "maps": [
+        {
+            "name": "XRActions",
+            "id": "05675fc9-8d76-4b5a-9ef2-22e1074bec36",
+            "actions": [
+                {
+                    "name": "Grab",
+                    "type": "Button",
+                    "id": "ed209714-73cd-439e-bf61-ec446dc30193",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5412d619-dbc6-4d86-a2eb-d41fd841db35",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
