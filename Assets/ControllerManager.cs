@@ -1,5 +1,8 @@
 using UnityEngine;
+using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
+
+
 
 public class ControllerManager : MonoBehaviour
 {
@@ -35,16 +38,23 @@ public class ControllerManager : MonoBehaviour
     // 判斷是否按下 trigger 鍵
     bool IsTriggerPressed(UnityEngine.XR.Interaction.Toolkit.Interactors.XRBaseInteractor interactor)
     {
-        var controllerInteractor = interactor as UnityEngine.XR.Interaction.Toolkit.Interactors.XRBaseInputInteractor;
-        if (controllerInteractor != null)
+        XRNode handNode;
+
+        if (interactor.name.ToLower().Contains("left"))
+            handNode = XRNode.LeftHand;
+        else if (interactor.name.ToLower().Contains("right"))
+            handNode = XRNode.RightHand;
+        else
+            return false;
+
+        InputDevice device = InputDevices.GetDeviceAtXRNode(handNode);
+        if (device.TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerPressed))
         {
-            InputDevice device = controllerInteractor.xrController.inputDevice;
-            if (device.TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerValue))
-            {
-                return triggerValue;
-            }
+            return triggerPressed;
         }
+
         return false;
     }
+
 
 }
