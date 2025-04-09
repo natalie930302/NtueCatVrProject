@@ -13,15 +13,14 @@ public class ControllerManager : MonoBehaviour
     {
         if (interactor == null) return;
 
-        // 檢查抓取按鈕是否按下
         if (IsTriggerPressed(interactor))
         {
-            // 有抓到東西嗎？
-            if (interactor.selectTarget != null)
+            // 安全取得目前選中的第一個 Interactable
+            if (interactor.interactablesSelected.Count > 0)
             {
-                GameObject grabbedObject = interactor.selectTarget.gameObject;
+                var selectedInteractable = interactor.interactablesSelected[0];
+                GameObject grabbedObject = selectedInteractable.transform.gameObject;
 
-                // 嘗試取得 cubeType
                 CubeTypeIdentifier identifier = grabbedObject.GetComponent<CubeTypeIdentifier>();
                 if (identifier != null)
                 {
@@ -31,13 +30,21 @@ public class ControllerManager : MonoBehaviour
         }
     }
 
+
+
     // 判斷是否按下 trigger 鍵
-    private bool IsTriggerPressed(UnityEngine.XR.Interaction.Toolkit.Interactors.XRBaseInputInteractor interactor)
+    bool IsTriggerPressed(UnityEngine.XR.Interaction.Toolkit.Interactors.XRBaseInteractor interactor)
     {
-        if (interactor.inputDevice.IsPressed(grabButton, out bool isPressed, activationThreshold))
+        var controllerInteractor = interactor as UnityEngine.XR.Interaction.Toolkit.Interactors.XRBaseInputInteractor;
+        if (controllerInteractor != null)
         {
-            return isPressed;
+            InputDevice device = controllerInteractor.xrController.inputDevice;
+            if (device.TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerValue))
+            {
+                return triggerValue;
+            }
         }
         return false;
     }
+
 }
