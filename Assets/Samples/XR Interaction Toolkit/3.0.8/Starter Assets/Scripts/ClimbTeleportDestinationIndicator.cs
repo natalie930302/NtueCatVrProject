@@ -61,7 +61,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         {
             if (m_ClimbTeleportInteractor == null)
             {
-                if (!ComponentLocatorUtility<ClimbTeleportInteractor>.TryFindComponent(out m_ClimbTeleportInteractor))
+                m_ClimbTeleportInteractor = FindObjectOfType<ClimbTeleportInteractor>();
+                if (m_ClimbTeleportInteractor == null)
                 {
                     Debug.LogError($"Could not find {nameof(ClimbTeleportInteractor)} in scene.");
                     enabled = false;
@@ -72,6 +73,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             m_ClimbTeleportInteractor.hoverEntered.AddListener(OnInteractorHoverEntered);
             m_ClimbTeleportInteractor.hoverExited.AddListener(OnInteractorHoverExited);
         }
+
 
         /// <summary>
         /// See <see cref="MonoBehaviour"/>.

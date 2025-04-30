@@ -1,16 +1,14 @@
 using UnityEngine;
 using UnityEngine.XR;
-using UnityEngine.XR.Interaction.Toolkit;
-
-
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class ControllerManager : MonoBehaviour
 {
-    public UnityEngine.XR.Interaction.Toolkit.Interactors.XRDirectInteractor interactor; // 手柄抓取器
-    public InputHelpers.Button grabButton = InputHelpers.Button.Trigger;
+    public XRDirectInteractor interactor; // 手柄抓取器
     public float activationThreshold = 0.1f;
 
-    private UnityEngine.XR.Interaction.Toolkit.Interactables.XRBaseInteractable currentInteractable;
+    private XRBaseInteractable currentInteractable;
 
     void Update()
     {
@@ -33,16 +31,15 @@ public class ControllerManager : MonoBehaviour
         }
     }
 
-
-
     // 判斷是否按下 trigger 鍵
-    bool IsTriggerPressed(UnityEngine.XR.Interaction.Toolkit.Interactors.XRBaseInteractor interactor)
+    bool IsTriggerPressed(XRBaseInteractor interactor)
     {
         XRNode handNode;
 
-        if (interactor.name.ToLower().Contains("left"))
+        string nameLower = interactor.name.ToLower();
+        if (nameLower.Contains("left"))
             handNode = XRNode.LeftHand;
-        else if (interactor.name.ToLower().Contains("right"))
+        else if (nameLower.Contains("right"))
             handNode = XRNode.RightHand;
         else
             return false;
@@ -55,6 +52,4 @@ public class ControllerManager : MonoBehaviour
 
         return false;
     }
-
-
 }
