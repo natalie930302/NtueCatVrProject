@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 93af98e7c68ce7e40addaa4200641075
+AssetOrigin:
+  serializedVersion: 1
+  productId: 84185
+  packageName: Cockroach
+  packageVersion: 5.3.8p2
+  assetPath: Assets/Cockroach/Cockroach.controller
+  uploadId: 220844
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: none
+  assetBundleVariant: 

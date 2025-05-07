@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: e825c30262c222749ae7c54fad1b5c81
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 84185
+  packageName: Cockroach
+  packageVersion: 5.3.8p2
+  assetPath: Assets/Cockroach/Prefabs/Cockroach.prefab
+  uploadId: 220844

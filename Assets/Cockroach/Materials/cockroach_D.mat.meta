@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: db993ac05f4d1114098bfa30fcc552ea
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 84185
+  packageName: Cockroach
+  packageVersion: 5.3.8p2
+  assetPath: Assets/Cockroach/Materials/cockroach_D.mat
+  uploadId: 220844
